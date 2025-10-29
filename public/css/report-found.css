@@ -1,0 +1,128 @@
+/* BODY STYLING */
+body {
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #e8f0ff, #f3f7fc);
+  margin: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* DASHBOARD-STYLE HEADER */
+.header {
+  width: 100%;
+  background: linear-gradient(135deg, #004aad, #007bff);
+  color: white;
+  padding: 15px 0;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+.header h1 {
+  margin: 0;
+  font-size: 22px;
+  letter-spacing: 0.5px;
+}
+
+/* FORM CONTAINER */
+.container {
+  background: #fff;
+  width: 400px;
+  max-width: 95%;
+  margin: 30px auto;
+  padding: 35px 25px;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+.container:hover {
+  transform: translateY(-3px);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+/* FORM ELEMENTS */
+form label {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  color: #444;
+  margin-top: 12px;
+}
+form label .emoji {
+  display: inline-block;
+  width: 28px;
+  text-align: center;
+  margin-right: 8px;
+  font-size: 1.2rem;
+}
+input, select, textarea {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+textarea {
+  height: 80px;
+  resize: vertical;
+}
+
+/* BUTTON */
+button {
+  width: 100%;
+  padding: 12px 0;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+button:hover {
+  background: #0056b3;
+}
+
+/* BACK LINK */
+.back {
+  display: block;
+  margin-top: 18px;
+  text-decoration: none;
+  color: #007bff;
+  font-weight: 600;
+  text-align: center;
+}
+.back:hover {
+  text-decoration: underline;
+}
+
+/* FOOTER */
+footer {
+  margin-top: 25px;
+  font-size: 0.9rem;
+  text-align: center;
+  color: #555;
+}
+footer a {
+  color: #007bff;
+  text-decoration: none;
+}
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 500px) {
+  .container {
+    padding: 25px 15px;
+  }
+}

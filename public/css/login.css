@@ -1,0 +1,118 @@
+/* Base */
+body {
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #e8f0ff, #f3f7fc);
+  margin: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header */
+.header {
+  width: 100%;
+  background: linear-gradient(135deg, #004aad, #007bff);
+  color: white;
+  padding: 15px 0;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+.header h1 {
+  margin: 0;
+  font-size: 22px;
+  letter-spacing: 0.5px;
+}
+
+/* Login Form Container */
+.login-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.form-card {
+  background: #fff;
+  padding: 35px 30px;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  max-width: 400px;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+.form-card:hover {
+  transform: translateY(-3px);
+}
+
+.form-card h2 {
+  margin-bottom: 25px;
+  color: #222;
+  font-size: 22px;
+}
+
+label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+  color: #333;
+  text-align: left;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #007bff, #005ad5);
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0,123,255,0.25);
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #005ad5, #0043a6);
+  transform: translateY(-2px);
+}
+
+/* Footer */
+footer {
+  padding: 15px 0;
+  font-size: 13px;
+  color: #555;
+}
+footer a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+}
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* Mobile Responsive */
+@media (max-width: 500px) {
+  .form-card {
+    padding: 25px 20px;
+  }
+  .form-card h2 {
+    font-size: 20px;
+  }
+  input, button {
+    font-size: 15px;
+    padding: 10px;
+  }
+}

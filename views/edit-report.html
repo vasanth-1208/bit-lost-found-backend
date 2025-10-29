@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit My Report | BIT Lost-Found Portal</title>
+  <link rel="stylesheet" href="/css/edit-report.css">
+</head>
+<body>
+
+  <header class="header">
+    <h1>BIT Lost-Found Portal</h1>
+  </header>
+
+  <main class="container">
+    <div class="form-container">
+      <h2>Edit My Report</h2>
+      <form id="editForm" enctype="multipart/form-data">
+
+        <label><span class="emoji">📦</span> Item Name:</label>
+        <input type="text" name="item_name" required>
+
+        <label><span class="emoji">🗂️</span> Item Type:</label>
+        <select name="item_type" required>
+          <option value="note">Note</option>
+          <option value="file">File</option>
+          <option value="electronics">Electronics</option>
+          <option value="others">Others</option>
+        </select>
+
+        <label><span class="emoji">🏢</span> Block:</label>
+        <select name="item_block" required>
+          <option value="IB">IB</option>
+          <option value="AS">AS</option>
+          <option value="SF">SF</option>
+          <option value="MECH">MECH</option>
+          <option value="BoysMess">Boys Mess</option>
+          <option value="GirlsMess">Girls Mess</option>
+          <option value="RP">RP</option>
+          <option value="Others">Others</option>
+        </select>
+
+        <label><span class="emoji">📍</span> Place:</label>
+        <input type="text" name="item_place" required>
+
+        <label><span class="emoji">📝</span> Description:</label>
+        <textarea name="description" required></textarea>
+
+        <label><span class="emoji">💬</span> Remarks:</label>
+        <textarea name="remarks"></textarea>
+
+        <label><span class="emoji">📸</span> Current Photo:</label>
+        <div id="photoPreview">No photo</div>
+
+        <label>Upload New Photo (optional):</label>
+        <input type="file" name="photo" accept="image/*">
+
+        <button type="submit">Update Report</button>
+      </form>
+
+      <a href="/my-reports" class="back">⬅ Go Back</a>
+
+      <footer>
+        For any queries, contact: 
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=bitlostfoundportal@gmail.com" target="_blank">
+        bitlostfoundportal@gmail.com
+      </a>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    const itemId = window.location.pathname.split("/").pop();
+    const form = document.getElementById('editForm');
+    const photoDiv = document.getElementById('photoPreview');
+
+    // Fetch item data
+    fetch(`/edit-item/${itemId}/data`)
+      .then(res => res.json())
+      .then(item => {
+        form.item_name.value = item.item_name;
+        form.item_type.value = item.item_type;
+        form.item_block.value = item.item_block;
+        form.item_place.value = item.item_place;
+        form.description.value = item.description;
+        form.remarks.value = item.remarks || "";
+
+        if(item.photo){
+          photoDiv.innerHTML = `<img src="/uploads/${item.photo}" class="thumb">`;
+        }
+      })
+      .catch(err => photoDiv.innerHTML = "Failed to load item");
+
+    // Handle form submit via AJAX
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch(`/update-item/${itemId}`, {
+          method: 'POST',
+          body: formData
+        });
+        const data = await response.json();
+        alert(data.message);
+        if(data.success) window.location.href = '/my-reports';
+      } catch(err) {
+        alert("Error updating report: " + err);
+      }
+    });
+  </script>
+
+</body>
+</html>

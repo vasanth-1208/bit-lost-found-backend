@@ -1,0 +1,27 @@
+{
+  "name": "campu-lost-found",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "cookie-session": "^2.1.1",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "googleapis": "^164.1.0",
+    "multer": "^2.0.2",
+    "mysql": "^2.18.1",
+    "nodemailer": "^7.0.10",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0"
+  }
+  
+}

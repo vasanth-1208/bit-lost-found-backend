@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Report Lost Item | BIT Lost-Found Portal</title>
+  <link rel="stylesheet" href="/css/report-lost.css">
+</head>
+<body>
+
+  <!-- DASHBOARD-STYLE HEADER -->
+  <header class="header">
+    <h1>BIT Lost-Found Portal</h1>
+  </header>
+
+  <main class="container">
+    <div class="form-container">
+      <h2>Report Lost Item</h2>
+      <form method="POST" action="/submit-lost" enctype="multipart/form-data">
+
+        <label><span class="emoji">📦</span> Item Name:</label>
+        <input type="text" name="item_name" placeholder="Enter item name" required>
+
+        <label><span class="emoji">🗂️</span> Item Type:</label>
+        <select name="item_type" required>
+          <option value="">Select Item Type</option>
+          <option value="Note">Note</option>
+          <option value="File">File</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Others">Others</option>
+        </select>
+
+        <label><span class="emoji">🏢</span> Block:</label>
+        <select name="item_block" required>
+          <option value="">Select Block</option>
+          <option value="IB">IB</option>
+          <option value="AS">AS</option>
+          <option value="SF">SF</option>
+          <option value="MECH">MECH</option>
+          <option value="BoysMess">BoysMess</option>
+          <option value="GirlsMess">GirlsMess</option>
+          <option value="RP">RP</option>
+          <option value="Others">Others</option>
+        </select>
+
+        <label><span class="emoji">📍</span> Place:</label>
+        <input type="text" name="item_place" placeholder="Enter place" required>
+
+        <label><span class="emoji">📱</span> Mobile Number:</label>
+        <input type="text" name="mobile_number" placeholder="Enter your mobile number" required>
+
+        <label><span class="emoji">✉️</span> College Email:</label>
+        <input type="email" name="college_email" placeholder="Enter your college email" required>
+
+        <label><span class="emoji">📝</span> Description:</label>
+        <textarea name="description" placeholder="Provide item description" required></textarea>
+
+        <label><span class="emoji">📸</span> Photo:</label>
+        <input type="file" name="photo" accept="image/*">
+
+        <label><span class="emoji">💬</span> Remarks (optional):</label>
+        <input type="text" name="remarks" placeholder="Additional remarks">
+
+        <button type="submit">Submit</button>
+      </form>
+
+      <a href="/dashboard" class="back">⬅ Go Back</a>
+
+      <footer>
+        For any queries, contact: 
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=bitlostfoundportal@gmail.com" target="_blank">
+        bitlostfoundportal@gmail.com
+      </a>
+      </footer>
+    </div>
+  </main>
+
+</body>
+</html>

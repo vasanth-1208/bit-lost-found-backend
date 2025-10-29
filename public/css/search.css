@@ -1,0 +1,156 @@
+body {
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #e8f0ff, #f3f7fc);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.header {
+  width: 100%;
+  background: linear-gradient(135deg, #004aad, #007bff);
+  color: white;
+  padding: 15px 0;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+.header h1 {
+  margin: 0;
+  font-size: 22px;
+}
+
+/* Container + Table */
+.container {
+  width: 99%;
+  max-width: 1450px; /* ✅ expanded width */
+  margin: 30px auto;
+}
+
+.table-scroll {
+  overflow-x: auto;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  padding: 0.3cm;
+  background: transparent;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #f8faff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+thead {
+  background: #007bff;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+th, td {
+  padding: 14px 12px;
+  font-size: 14px;
+  text-align: left;
+  min-width: 100px;
+}
+tbody tr {
+  height: 80px;
+  background: #ffffff;
+  transition: background 0.2s;
+}
+tbody tr:nth-child(even) { background: #f1f5fb; }
+tbody tr:hover { background: #e0f0ff; }
+
+/* Thumbnails */
+.thumb {
+  width: 65px;
+  height: 65px;
+  border-radius: 8px;
+  cursor: pointer;
+  object-fit: cover;
+  border: 1px solid #ddd;
+  transition: transform 0.2s;
+}
+.thumb:hover { transform: scale(1.05); }
+
+/* Buttons (same gradients as badges) */
+button {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  margin: 2px 0;
+  font-weight: 700;
+  color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+button.found-btn {
+  background: linear-gradient(135deg, #00b09b, #007bff);
+}
+button.found-btn:hover {
+  background: linear-gradient(135deg, #009688, #0056b3);
+}
+
+button.contact-btn {
+  background: linear-gradient(135deg, #004aad, #00b09b);
+}
+button.contact-btn:hover {
+  background: linear-gradient(135deg, #003580, #00897b);
+}
+
+/* Elegant Badges */
+.status {
+  display: inline-block;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: capitalize;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.status-lost {
+  background: linear-gradient(135deg, #ff4d4d, #ff7373);
+}
+.status-found {
+  background: linear-gradient(135deg, #00b09b, #007bff);
+}
+.status-contacted {
+  background: linear-gradient(135deg, #004aad, #00b09b);
+}
+.status-done {
+  background: linear-gradient(135deg, #007bff, #339cff);
+}
+
+.back {
+  display: inline-block;
+  margin-top: 20px;
+  color: #007bff;
+  font-weight: 600;
+  text-decoration: none;
+}
+.back:hover { text-decoration: underline; }
+
+@media(max-width: 768px) {
+  th, td { font-size: 12px; padding: 10px; min-width: 80px; }
+  tbody tr { height: 70px; }
+  .thumb { width: 55px; height: 55px; }
+  button { font-size: 0.75rem; padding: 5px 10px; }
+}
+
+@media(max-width: 480px) {
+  th, td { font-size: 11px; padding: 6px; min-width: 70px; }
+  tbody tr { height: 60px; }
+  .thumb { width: 45px; height: 45px; }
+}

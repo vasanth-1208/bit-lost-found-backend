@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Items - Lost & Found</title>
+  <link rel="stylesheet" href="/css/search.css">
+</head>
+<body>
+  <header class="header">
+    <h1>BIT Lost-Found Portal</h1>
+  </header>
+
+  <main class="container">
+    <h2>All Reported Items</h2>
+
+    <div class="table-scroll">
+      <table id="search-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Block</th>
+            <th>Place</th>
+            <th>Mobile</th>
+            <th>Email</th>
+            <th>Description</th>
+            <th>Photo</th>
+            <th>Remarks</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="itemRows">
+          <!-- JS will populate rows -->
+        </tbody>
+      </table>
+    </div>
+
+    <a href="/dashboard" class="back">⬅ Go Back</a>
+  </main>
+
+  <script>
+    async function loadItems() {
+      try {
+        const res = await fetch("/search/data");
+        const data = await res.json();
+        const tbody = document.getElementById("itemRows");
+        tbody.innerHTML = "";
+
+        if (data.length === 0) {
+          tbody.innerHTML = "<tr><td colspan='11'>No reports found.</td></tr>";
+          return;
+        }
+
+        data.forEach(r => {
+          const statusClass =
+            r.status === "lost" ? "status-lost" :
+            r.status === "found" ? "status-found" :
+            r.status === "done" ? "status-done" : "";
+
+          const action =
+            r.status === "lost"
+              ? (r.email_sent
+                  ? "<span class='status status-found'>Found</span>"
+                  : `<button class="found-btn" data-id="${r.item_id}">Found</button>`)
+              : r.status === "found"
+                ? (r.contact_email_sent
+                    ? "<span class='status status-contacted'>Contacted</span>"
+                    : `<button class="contact-btn" data-id="${r.item_id}">Contact</button>`)
+                : "<span class='status status-done'>Done</span>";
+
+          const row = document.createElement("tr");
+          row.id = `item-${r.item_id}`;
+          row.innerHTML = `
+            <td>${r.item_name}</td>
+            <td>${r.item_type}</td>
+            <td>${r.item_block}</td>
+            <td>${r.item_place}</td>
+            <td>${r.mobile_number}</td>
+            <td>${r.college_email}</td>
+            <td>${r.description}</td>
+            <td>${r.photo ? `<img src="${r.photo}" class="thumb" onclick="openModal('${r.photo}')">` : "N/A"}</td>
+            <td>${r.remarks || "N/A"}</td>
+            <td><span class="status ${statusClass}">${r.status}</span></td>
+            <td>${action}</td>
+          `;
+          tbody.appendChild(row);
+        });
+
+        attachButtons();
+      } catch (err) {
+        console.error("Error loading items:", err);
+      }
+    }
+
+    function attachButtons() {
+      document.querySelectorAll(".found-btn").forEach(btn => {
+        btn.addEventListener("click", async function () {
+          const id = this.dataset.id;
+          this.disabled = true;
+          try {
+            const res = await fetch(`/mark-found/${id}`, { method: "POST" });
+            const data = await res.json();
+            alert(data.message);
+            if (data.success) {
+              const row = document.getElementById(`item-${id}`);
+              row.cells[row.cells.length - 1].innerHTML =
+                "<span class='status status-found'>Found</span>";
+              row.cells[row.cells.length - 2].innerHTML =
+                "<span class='status status-found'>Found</span>";
+            } else this.disabled = false;
+          } catch (err) {
+            alert("Error: " + err);
+            this.disabled = false;
+          }
+        });
+      });
+
+      document.querySelectorAll(".contact-btn").forEach(btn => {
+        btn.addEventListener("click", async function () {
+          const id = this.dataset.id;
+          this.disabled = true;
+          try {
+            const res = await fetch("/send-contact", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ itemId: id }),
+            });
+            const data = await res.json();
+            alert(data.message);
+            if (data.success) {
+              const row = document.getElementById(`item-${id}`);
+              row.cells[row.cells.length - 1].innerHTML =
+                "<span class='status status-contacted'>Contacted</span>";
+              row.cells[row.cells.length - 2].innerHTML =
+                "<span class='status status-found'>Found</span>";
+            } else this.disabled = false;
+          } catch (err) {
+            alert("Error: " + err);
+            this.disabled = false;
+          }
+        });
+      });
+    }
+
+    function openModal(src) {
+      const modal = window.open(src, "_blank");
+      if (!modal) alert("Popup blocked. Allow popups to view image.");
+    }
+
+    loadItems();
+  </script>
+</body>
+</html>

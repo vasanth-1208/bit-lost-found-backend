@@ -1,0 +1,156 @@
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: #f3f7fc;
+  margin: 0;
+  text-align: center;
+}
+
+.table-container {
+  width: 95%;
+  margin: 20px auto;
+  background: #fff;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.table-container h2 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+}
+
+th, td {
+  padding: 8px;
+  text-align: center;
+  font-size: 14px;
+}
+
+th {
+  background: #007bff;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+tr:nth-child(even) {
+  background: #f2f2f2;
+}
+
+img.thumb {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+img.thumb:hover {
+  transform: scale(1.5);
+}
+
+.lost {
+  color: red;
+  font-weight: bold;
+}
+
+.found {
+  color: green;
+  font-weight: bold;
+}
+
+.back {
+  display: inline-block;
+  margin-top: 10px;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.back:hover {
+  text-decoration: underline;
+}
+
+/* Buttons */
+button.found-btn {
+  padding: 4px 10px;
+  border: none;
+  background: #28a745;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.2s;
+}
+
+button.found-btn:hover {
+  background: #218838;
+}
+
+button.contact-btn {
+  padding: 4px 10px;
+  border: none;
+  background: #17a2b8;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.2s;
+}
+
+button.contact-btn:hover {
+  background: #138496;
+}
+
+/* Image modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.8);
+}
+
+.modal-content {
+  margin: auto;
+  display: block;
+  max-width: 80%;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  th, td {
+    font-size: 12px;
+    padding: 6px;
+  }
+  img.thumb {
+    width: 40px;
+    height: 40px;
+  }
+}

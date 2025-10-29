@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BIT Lost-Found Portal | Dashboard</title>
+  <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+
+  <header class="header">
+    <h1>BIT Lost-Found Portal</h1>
+  </header>
+
+  <main class="container">
+    <!-- Profile Section -->
+    <section class="profile">
+      <div class="avatar">🧑‍🎓</div>
+      <div class="info">
+        <h2 id="student-name">Loading...</h2>
+        <p id="student-roll">(Roll No)</p>
+      </div>
+    </section>
+
+    <!-- Quick Stats Grid -->
+    <section class="stats-grid">
+      <div class="stat-card">
+        <h3 id="lost-count">0</h3>
+        <p>Lost Items</p>
+      </div>
+      <div class="stat-card">
+        <h3 id="found-count">0</h3>
+        <p>Found Items</p>
+      </div>
+      <div class="stat-card">
+        <h3 id="myreports-count">0</h3>
+        <p>My Reports</p>
+      </div>
+    </section>
+
+    <!-- Action Buttons -->
+    <section class="links">
+      <a href="/report-lost" class="btn">Report Lost Item</a>
+      <a href="/report-found" class="btn">Report Found Item</a>
+      <a href="/search" class="btn">Search Items</a>
+      <a href="/my-reports" class="btn">My Reports</a>
+      <a href="/logout" class="btn logout">Logout</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      For any queries, contact: 
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=bitlostfoundportal@gmail.com" target="_blank">
+        bitlostfoundportal@gmail.com
+      </a>
+    </footer>
+  </main>
+
+  <script>
+    // Fetch logged-in user data
+    fetch('/api/user')
+      .then(res => res.json())
+      .then(data => {
+        // Update name & roll number instantly
+        document.getElementById('student-name').textContent = data.name || 'User';
+        document.getElementById('student-roll').textContent = data.rollno ? `(${data.rollno})` : '(Roll No)';
+
+        // Update quick stats if available
+        document.getElementById('lost-count').textContent = data.lostCount || 0;
+        document.getElementById('found-count').textContent = data.foundCount || 0;
+        document.getElementById('myreports-count').textContent = data.myReportsCount || 0;
+      })
+      .catch(err => console.error('Error loading user data:', err));
+  </script>
+
+</body>
+</html>

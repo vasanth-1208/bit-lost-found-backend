@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Reports | BIT Lost-Found Portal</title>
+  <link rel="stylesheet" href="/css/my-reports.css">
+</head>
+<body>
+
+  <!-- DASHBOARD-STYLE HEADER -->
+  <header class="header">
+    <h1>BIT Lost-Found Portal</h1>
+  </header>
+
+  <main class="container">
+    <h2>My Reported Items</h2>
+
+    <div class="table-scroll">
+      <table id="reports-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Block</th>
+            <th>Place</th>
+            <th>Description</th>
+            <th>Remarks</th>
+            <th>Status</th>
+            <th>Photo</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- JS will populate rows -->
+        </tbody>
+      </table>
+    </div>
+
+    <a class="back" href="/dashboard"><span>⬅ Go Back</span></a>
+
+    <footer>
+      For any queries, contact: 
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=bitlostfoundportal@gmail.com" target="_blank">
+        bitlostfoundportal@gmail.com
+      </a>
+    </footer>
+  </main>
+
+  <script>
+    async function loadReports() {
+      try {
+        const res = await fetch('/my-reports/data');
+        const data = await res.json();
+        const tbody = document.querySelector("#reports-table tbody");
+        tbody.innerHTML = "";
+
+        if(data.length === 0){
+          tbody.innerHTML = "<tr><td colspan='9'>No reports found.</td></tr>";
+          return;
+        }
+
+        data.forEach(item => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${item.item_name || "-"}</td>
+          <td>${item.item_type || "-"}</td>
+          <td>${item.item_block || "-"}</td>
+          <td>${item.item_place || "-"}</td>
+          <td>${item.description || "-"}</td>
+          <td>${item.remarks || "-"}</td>
+          <td><span class="status ${item.status.toLowerCase()}">${item.status || "-"}</span></td>
+          <td>${item.photo ? `<img src="/uploads/${item.photo}" class="thumb" onclick="openModal('/uploads/${item.photo}')">` : "-"}</td>
+          <td>
+            <button class="edit-btn" onclick="editReport(${item.item_id})">Edit</button>
+            <button class="delete-btn" onclick="deleteReport(${item.item_id})">Delete</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      } catch(err) {
+        console.error("Error loading reports:", err);
+      }
+    }
+
+    function openModal(src){
+      const modal = window.open(src, "_blank");
+      if(!modal) alert("Popup blocked. Allow popups to view image.");
+    }
+
+    function editReport(id){
+      window.location.href = `/edit-item/${id}`;
+    }
+
+    function deleteReport(id){
+      if(confirm("Are you sure you want to delete this report?")){
+        fetch(`/delete-item/${id}`, { method:'DELETE' })
+          .then(res => res.json())
+          .then(data => {
+            alert(data.message);
+            loadReports();
+          })
+          .catch(err => alert("Error: "+err));
+      }
+    }
+
+    loadReports();
+  </script>
+</body>
+</html>

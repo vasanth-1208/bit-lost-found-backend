@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - BIT Lost & Found Portal</title>
+  <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <h1>BIT Lost-Found Portal</h1>
+  </header>
+
+  <!-- Login Form -->
+  <main class="login-container">
+    <div class="form-card">
+      <h2>🎓 Student Login</h2>
+      <form method="POST" action="/login">
+        <label for="rollno">Roll Number:</label>
+        <input type="text" id="rollno" name="rollno" placeholder="Enter your roll number" required>
+
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+        <label for="college_email">College Email:</label>
+        <input type="email" id="college_email" name="college_email" placeholder="Enter your college email" required>
+
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <p>For any queries, contact: 
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=bitlostfoundportal@gmail.com" target="_blank">
+        bitlostfoundportal@gmail.com
+      </a>
+    </p>
+  </footer>
+
+</body>
+</html>
